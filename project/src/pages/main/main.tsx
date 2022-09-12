@@ -1,12 +1,28 @@
-import MovieItem from '../../components/movie-item/movie-item';
+import MovieList from '../../components/movie-list/movie-list';
+import { Films } from '../../types/film';
+import { useNavigate, Link } from 'react-router-dom';
 
 type AppProps = {
   title: string,
   genre: string,
-  year: number
+  year: number,
+  poster: string,
+  films: Films
 }
 
-function Main({ title, genre, year }: AppProps): JSX.Element {
+function Main({ title, genre, year, poster, films }: AppProps): JSX.Element {
+  const navigate = useNavigate();
+
+  const myListButtonClickHandler = () => {
+    const path = '/mylist';
+    navigate(path);
+  };
+
+  const playButtonClickHandler = () => {
+    const path = '/player/:1';
+    navigate(path);
+  };
+
   return (
     <>
       <div className="visually-hidden">
@@ -43,7 +59,7 @@ function Main({ title, genre, year }: AppProps): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={poster} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -83,18 +99,18 @@ function Main({ title, genre, year }: AppProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={() => playButtonClickHandler()}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={() => myListButtonClickHandler()} >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{films.length}</span>
                 </button>
               </div>
             </div>
@@ -108,57 +124,39 @@ function Main({ title, genre, year }: AppProps): JSX.Element {
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <Link to="#" className="catalog__genres-link">All genres</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <Link to="#" className="catalog__genres-link">Comedies</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <Link to="#" className="catalog__genres-link">Crime</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <Link to="#" className="catalog__genres-link">Documentary</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <Link to="#" className="catalog__genres-link">Dramas</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <Link to="#" className="catalog__genres-link">Horror</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <Link to="#" className="catalog__genres-link">Kids & Family</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <Link to="#" className="catalog__genres-link">Romance</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <Link to="#" className="catalog__genres-link">Sci-Fi</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <Link to="#" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
 
           <div className="catalog__films-list">
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
-            <MovieItem moveTitle="Fantastic Beasts: The Crimes of Grindelwald" movePoster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"/>
+            <MovieList films={films} />
           </div>
 
           <div className="catalog__more">

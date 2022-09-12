@@ -1,4 +1,20 @@
-function PlayerPage(): JSX.Element {
+import { useParams, useNavigate } from 'react-router-dom';
+import { Film } from '../../types/film';
+
+type PlayerPageProps = {
+  films: Film[];
+}
+
+function PlayerPage({ films }: PlayerPageProps): JSX.Element {
+  const navigate = useNavigate();
+  const params = useParams();
+  const film = films.find((filmA) => String(filmA.id) === params.id) as Film;
+
+  const onExitButtonClickHandler = () => {
+    const path = `/films/${film.id}`;
+    navigate(path);
+  };
+
   return (
     <>
       <div className="visually-hidden">
@@ -35,7 +51,7 @@ function PlayerPage(): JSX.Element {
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-        <button type="button" className="player__exit">Exit</button>
+        <button type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</button>
 
         <div className="player__controls">
           <div className="player__controls-row">
